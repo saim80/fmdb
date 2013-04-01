@@ -368,10 +368,13 @@
         if (strcmp([obj objCType], @encode(BOOL)) == 0) {
             sqlite3_bind_int(pStmt, idx, ([obj boolValue] ? 1 : 0));
         }
-        else if (strcmp([obj objCType], @encode(int)) == 0) {
+        else if (strcmp([obj objCType], @encode(int))          == 0 ||
+                 strcmp([obj objCType], @encode(unsigned int)) == 0 )
+        {
             sqlite3_bind_int64(pStmt, idx, [obj longValue]);
         }
-        else if (strcmp([obj objCType], @encode(long)) == 0) {
+        else if (strcmp([obj objCType], @encode(long))          == 0 ||
+                 strcmp([obj objCType], @encode(unsigned long)) == 0 ) {
             sqlite3_bind_int64(pStmt, idx, [obj longValue]);
         }
         else if (strcmp([obj objCType], @encode(long long)) == 0) {
@@ -388,6 +391,119 @@
         }
         else {
             sqlite3_bind_text(pStmt, idx, [[obj description] UTF8String], -1, SQLITE_STATIC);
+        }
+    }
+    else if ([obj isKindOfClass:[NSValue class]]) {
+        NSString * outString = nil;
+        
+        if (strcmp([obj objCType], @encode(NSRange)) == 0) {
+            NSRange    range;
+            NSUInteger length = 0;
+            
+            NSGetSizeAndAlignment(@encode(NSRange), &length, NULL);
+            
+            [obj getBytes:&range length:length];
+            
+            outString = NSStringFromRange(range);
+        }
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+        else if (strcmp([obj objCType], @encode(CGPoint)) == 0) {
+            CGPoint point;
+            NSUInteger length = 0;
+            
+            NSGetSizeAndAlignment(@encode(CGPoint), &length, NULL);
+            
+            [obj getBytes:&point length:length];
+            
+            outString = NSStringFromCGPoint(point);
+        } else if (strcmp([obj objCType], @encode(CGSize)) == 0) {
+            CGSize size;
+            NSUInteger length = 0;
+            
+            NSGetSizeAndAlignment(@encode(CGSize), &length, NULL);
+            
+            [obj getBytes:&size length:length];
+            
+            outString = NSStringFromCGSize(size);
+        } else if (strcmp([obj objCType], @encode(CGRect)) == 0) {
+            CGRect rect;
+            NSUInteger length = 0;
+            
+            NSGetSizeAndAlignment(@encode(CGRect), &length, NULL);
+            
+            [obj getBytes:&rect length:length];
+            
+            outString = NSStringFromCGRect(rect);
+        } else if (strcmp([obj objCType], @encode(CGAffineTransform))) {
+            CGAffineTransform transform;
+            NSUInteger length = 0;
+            
+            NSGetSizeAndAlignment(@encode(CGAffineTransform), &length, NULL);
+            
+            [obj getBytes:&transform length:length];
+            
+            outString = NSStringFromCGAffineTransform(transform);
+        } else if (strcmp([obj objCType], @encode(UIEdgeInsets))) {
+            UIEdgeInsets insets;
+            NSUInteger length = 0;
+            
+            NSGetSizeAndAlignment(@encode(UIEdgeInsets), &length, NULL);
+            
+            [obj getBytes:&insets length:length];
+            
+            outString = NSStringFromUIEdgeInsets(insets);
+        } else if (strcmp([obj objCType], @encode(UIOffset))) {
+            UIOffset offset;
+            NSUInteger length = 0;
+            
+            NSGetSizeAndAlignment(@encode(UIOffset), &length, NULL);
+            
+            [obj getBytes:&offset length:length];
+            
+            outString = NSStringFromUIOffset(offset);
+        }
+#else
+        else if (strcmp([obj objCType], @encode(NSPoint))) {
+            NSPoint point;
+            NSUInteger length = 0;
+            
+            NSGetSizeAndAlignment(@encode(NSPoint), &length, NULL);
+            
+            [obj getBytes:&point length:length];
+            
+            outString = NSStringFromPoint(point);
+        } else if (strcmp([obj objCType], @encode(NSSize))) {
+            NSSize size;
+            NSUInteger length = 0;
+            
+            NSGetSizeAndAlignment(@encode(NSSize), &length, NULL);
+            
+            [obj getBytes:&size length:length];
+            
+            outString = NSStringFromSize(size);
+        } else if (strcmp([obj objCType], @encode(NSRect))) {
+            NSRect rect;
+            NSUInteger length = 0;
+            
+            NSGetSizeAndAlignment(@encode(NSRect), &length, NULL);
+            
+            [obj getBytes:&rect length:length];
+            
+            outString = NSStringFromRect(rect);
+        }
+#endif
+        
+        if (outString) {
+            sqlite3_bind_text(pStmt, idx, [outString UTF8String], -1, SQLITE_STATIC);
+        } else {
+            NSUInteger length = 0;
+            void *bytes = NULL;
+            
+            NSGetSizeAndAlignment([obj objCType], &length, NULL);
+            
+            [obj getBytes:bytes length:length];
+            
+            sqlite3_bind_blob(pStmt, idx, bytes, (int)length, SQLITE_STATIC);
         }
     }
     else {
