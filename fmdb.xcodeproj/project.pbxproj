@@ -19,6 +19,8 @@
 		341A961F16FECB8D009F6730 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = CC47A00E148581E9002CCDAB /* FMDatabaseQueue.m */; };
 		341A962116FECB8D009F6730 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE42910E12B430070088BD94 /* Foundation.framework */; };
 		341A962216FECB8D009F6730 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE42910C12B42FFA0088BD94 /* libsqlite3.dylib */; };
+		34984A33170A9F9200BD4D09 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34984A32170A9F9200BD4D09 /* UIKit.framework */; };
+		34984A34170A9FF000BD4D09 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBE26C013B3BA8C006F6C37 /* AppKit.framework */; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
 		8DD76F9F0486AA7600D96B5E /* fmdb.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859EA3029092ED04C91782 /* fmdb.1 */; };
 		CC47A00F148581E9002CCDAB /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = CC47A00D148581E9002CCDAB /* FMDatabaseQueue.h */; };
@@ -65,8 +67,8 @@
 		32A70AAB03705E1F00C91783 /* fmdb_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmdb_Prefix.pch; sourceTree = "<group>"; };
 		341A95ED16FECB4B009F6730 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		341A95FC16FECB4C009F6730 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		341A95FE16FECB4C009F6730 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		341A962616FECB8D009F6730 /* libFMDB-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFMDB-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34984A32170A9F9200BD4D09 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		8DD76FA10486AA7600D96B5E /* fmdb */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fmdb; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859EA3029092ED04C91782 /* fmdb.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = fmdb.1; sourceTree = "<group>"; };
 		CC47A00D148581E9002CCDAB /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = src/FMDatabaseQueue.h; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34984A33170A9F9200BD4D09 /* UIKit.framework in Frameworks */,
 				341A962116FECB8D009F6730 /* Foundation.framework in Frameworks */,
 				341A962216FECB8D009F6730 /* libsqlite3.dylib in Frameworks */,
 			);
@@ -114,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34984A34170A9FF000BD4D09 /* AppKit.framework in Frameworks */,
 				EE42910F12B430070088BD94 /* Foundation.framework in Frameworks */,
 				EE42910D12B42FFA0088BD94 /* libsqlite3.dylib in Frameworks */,
 			);
@@ -133,7 +137,6 @@
 				08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */,
 				341A95EC16FECB4B009F6730 /* Frameworks */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
-				EE42910C12B42FFA0088BD94 /* libsqlite3.dylib */,
 				EE42910E12B430070088BD94 /* Foundation.framework */,
 			);
 			name = fmdb;
@@ -181,9 +184,10 @@
 		341A95EC16FECB4B009F6730 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EE42910C12B42FFA0088BD94 /* libsqlite3.dylib */,
+				34984A32170A9F9200BD4D09 /* UIKit.framework */,
 				341A95ED16FECB4B009F6730 /* Foundation.framework */,
 				341A95FC16FECB4C009F6730 /* SenTestingKit.framework */,
-				341A95FE16FECB4C009F6730 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
